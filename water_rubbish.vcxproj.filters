@@ -21,15 +21,9 @@
     <ClCompile Include="merge.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="detect.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="merge.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="detect.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
