@@ -19,6 +19,8 @@ struct LinePara
 inline void getLinePara(Point2f& p1, Point2f& p2, LinePara& LP)
 {
     double m = 0;
+    p1.y = -p1.y;
+    p2.y = -p2.y;
     // 计算分子  
     m = p2.x - p1.x;
 
@@ -34,6 +36,24 @@ inline void getLinePara(Point2f& p1, Point2f& p2, LinePara& LP)
     }
 
 }
+
+
+void compress_image(Mat& frame, Mat& dst)
+{
+    for (int i = 0; i < frame.rows; i++)
+    {
+        for (int j = 0; j < frame.cols; j++)
+        {
+            frame.at<Vec3b>(i, j)[0] = frame.at<Vec3b>(i, j)[0];
+            frame.at<Vec3b>(i, j)[1] = frame.at<Vec3b>(i, j)[1];
+            frame.at<Vec3b>(i, j)[2] = frame.at<Vec3b>(i, j)[2];
+        }
+    }
+
+}
+
+
+
 
 
 void merge_test(string& file, Point2f& p1, Point2f& p2,Mat&dst)
@@ -66,6 +86,15 @@ void merge_test(string& file, Point2f& p1, Point2f& p2,Mat&dst)
         dot[i].x = p1.x + i * line_gap;
         dot[i].y = lp.k * dot[i].x + lp.b;
     }
+
+    for (auto &var : dot)
+    {
+        var.y = -var.y;
+    }
+
+
+
+    //点的距离长度
     vector<float> v;
     for (int i=0;i<dot.size()-1;i++)
     {
@@ -85,6 +114,8 @@ void merge_test(string& file, Point2f& p1, Point2f& p2,Mat&dst)
             break;
         }
 
+        //flip(frame, frame, 1);
+        //imwrite("frame.png", frame);
         //越界
         int width = frame.rows;
         int height = frame.cols;
