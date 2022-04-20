@@ -105,6 +105,8 @@ void merge_test(string& file, Point2f& p1, Point2f& p2,Mat&dst)
     //´æ´¢Í¼ÏñµÄÏñËØÖµ 
     vector<vector<Vec3b>> img_pix;
 
+
+    Mat H = imread("H.bmp");
     while (true)
     {
         vector<Vec3b>img_line;
@@ -113,6 +115,8 @@ void merge_test(string& file, Point2f& p1, Point2f& p2,Mat&dst)
         if (frame.empty()) {
             break;
         }
+
+        warpPerspective(frame, frame, H, frame.size());
 
         //flip(frame, frame, 1);
         //imwrite("frame.png", frame);
